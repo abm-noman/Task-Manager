@@ -5,7 +5,7 @@ if(!$connection){
     throw new Exception("Unable to connect to database");
 }
 
-$query = "SELECT * FROM tasks";
+$query = "SELECT * FROM tasks ORDER BY date";
 $result = mysqli_query($connection,$query);
 ?>
 
@@ -59,6 +59,8 @@ $result = mysqli_query($connection,$query);
                 <tbody>
                     <?php
                     while($data = mysqli_fetch_assoc($result)){
+                        $timestamp = strtotime($data['date']);
+                        $date = date("jS M, Y", $timestamp);
                     ?>
                     <tr>
                         <td><input class="label-inline" type="checkbox" value="<?php echo $data['id']; ?>"></td>
